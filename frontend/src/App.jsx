@@ -3,7 +3,7 @@ import "./App.css";
 const App = () => {
   return (
     <>
-      <h1 className='text-center'>Hello World</h1>
+      <h1 className='text-center text-4xl'>Hello World</h1>
     </>
   );
 };
