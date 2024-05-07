@@ -10,10 +10,10 @@ const App = () => {
         <CardTotals />
         <CardTotals />
       </div> */}
-      <div>
-        <div>
-          <PatientStatisticsChart />
-        </div>
+
+        <div className=" py-5 px-3 flex flex-col justify-center align-center">
+        <PatientStatisticsChart/>
+        
         <div>Pie chart</div>
       </div>
     </>
