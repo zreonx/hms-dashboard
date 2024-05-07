@@ -57,7 +57,7 @@ const data = [
   },
 ];
 const PatientStatisticsChart = () => {
-  const LineChart = () => (
+  const LineChart = ({ data }) => (
     <ResponsiveLine
       data={data}
       margin={{ top: 10, right: 60, bottom: 50, left: 60 }}
@@ -109,13 +109,13 @@ const PatientStatisticsChart = () => {
   );
 
   return (
-    <div className='h-[25rem] border rounded-lg flex w-full flex-col bg-white col-auto  lg:col-span-2'>
+    <div className='h-[25rem] border rounded-lg flex w-full flex-col bg-white col-auto lg:col-span-2'>
       <div className='flex flex-row justify-between px-5 py-5'>
         <h3 className=' font-semibold text-slate-600'>Patient Statistic</h3>
       </div>
 
-      <div className=' h-[25rem] w-full overflow-hidden'>
-        <LineChart />
+      <div className='h-[25rem] w-full overflow-hidden'>
+        <LineChart data={data} />
       </div>
     </div>
   );

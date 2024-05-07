@@ -132,12 +132,12 @@ const DoctorPieChart = () => {
           translateX: 0,
           translateY: 56,
           itemsSpacing: 0,
-          itemWidth: 100,
+          itemWidth: 72,
           itemHeight: 18,
           itemTextColor: "#999",
           itemDirection: "left-to-right",
           itemOpacity: 1,
-          symbolSize: 18,
+          symbolSize: 12,
           symbolShape: "circle",
           effects: [
             {
@@ -153,9 +153,9 @@ const DoctorPieChart = () => {
   );
 
   return (
-    <div className='h-[25rem] border rounded-lg bg-white p-5 w-full md:col-auto lg:col-auto '>
+    <div className='h-[25rem] border rounded-lg bg-white p-5 w-full md:col-auto lg:col-auto'>
       <div className=' '>
-        <h1>Pie chart</h1>
+        <h1 className='font-semibold text-slate-600'>Pie chart</h1>
       </div>
 
       <div className='h-full w-full overflow-hidden'>
