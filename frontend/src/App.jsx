@@ -1,9 +1,21 @@
-import "./App.css";
+import CardTotals from "./components/CardTotals";
+import PatientStatisticsChart from "./components/PatientStatisticsChart";
 
 const App = () => {
   return (
     <>
-      <h1 className='text-center text-4xl'>Hello World</h1>
+      {/* <div className='flex flex-row gap-5 p-5 max-md:flex-col'>
+        <CardTotals />
+        <CardTotals />
+        <CardTotals />
+        <CardTotals />
+      </div> */}
+      <div>
+        <div>
+          <PatientStatisticsChart />
+        </div>
+        <div>Pie chart</div>
+      </div>
     </>
   );
 };
