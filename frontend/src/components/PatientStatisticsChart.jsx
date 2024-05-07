@@ -1,4 +1,5 @@
 import { ResponsiveLine } from "@nivo/line";
+
 const data = [
   {
     id: "Patient",
@@ -84,6 +85,7 @@ const PatientStatisticsChart = () => {
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,
+        tickValues: [10, 50, 100, 150, 200, 250],
         tickRotation: 0,
         legend: "",
         legendOffset: -40,
@@ -107,11 +109,14 @@ const PatientStatisticsChart = () => {
   );
 
   return (
-    <div className='h-[18rem] lg:h-[480px]  border rounded-lg flex flex-col justify-center align-center bg-white flex-1 w-100  '>
-      <div className='flex flex-rox justify-between px-5 py-5'>
+    <div className='h-[25rem] border rounded-lg flex w-full flex-col bg-white col-auto  lg:col-span-2'>
+      <div className='flex flex-row justify-between px-5 py-5'>
         <h3 className=' font-semibold text-slate-600'>Patient Statistic</h3>
       </div>
-      <LineChart />
+
+      <div className=' h-[25rem] w-full overflow-hidden'>
+        <LineChart />
+      </div>
     </div>
   );
 };
