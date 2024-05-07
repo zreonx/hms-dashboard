@@ -1,5 +1,5 @@
 import { ResponsiveLine } from "@nivo/line";
-
+import { Select, SelectSection, SelectItem } from "@nextui-org/select";
 const data = [
   {
     id: "Patient",
@@ -112,6 +112,25 @@ const PatientStatisticsChart = () => {
     <div className='h-[25rem] border rounded-lg flex w-full flex-col bg-white col-auto lg:col-span-2'>
       <div className='flex flex-row justify-between px-5 py-5'>
         <h3 className=' font-semibold text-slate-600'>Patient Statistic</h3>
+        <Select
+          placeholder='Yearly'
+          className='max-w-[10rem] '
+          color='primary'
+          variant='flat'
+        >
+          <SelectItem className='hover:!bg-slate-100 focus:!bg-slate-100'>
+            All
+          </SelectItem>
+          <SelectItem className='hover:!bg-slate-100 focus:!bg-slate-100'>
+            2020
+          </SelectItem>
+          <SelectItem className='hover:!bg-slate-100 focus:!bg-slate-100'>
+            2021
+          </SelectItem>
+          <SelectItem className='hover:!bg-slate-100 focus:!bg-slate-100'>
+            2022
+          </SelectItem>
+        </Select>
       </div>
 
       <div className='h-[25rem] w-full overflow-hidden'>
