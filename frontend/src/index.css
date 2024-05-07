@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.bg-default {
+  background-color: #f3f3f3;
+}
+
+.bg-white-2 {
+  background-color: #ffffff;
+}
+
 body {
   font-family: "Poppins", sans-serif;
 }
