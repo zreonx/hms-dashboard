@@ -7,7 +7,9 @@ export const cardData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/card-totals");
+        const response = await fetch(
+          "https://hms-dashboard-api.vercel.app/api/card-totals"
+        );
         if (response.ok) {
           const json = await response.json();
           setData(json);
@@ -33,13 +35,16 @@ export const lineChartData = (filter) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/line-chart", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ year: filter }),
-        });
+        const response = await fetch(
+          "https://hms-dashboard-api.vercel.app/api/line-chart",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ year: filter }),
+          }
+        );
         if (response.ok) {
           const json = await response.json();
           setData(json);
@@ -65,7 +70,9 @@ export const pieChartData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/pie-chart");
+        const response = await fetch(
+          "https://hms-dashboard-api.vercel.app/api/pie-chart"
+        );
         if (response.ok) {
           const json = await response.json();
           setData(json);
