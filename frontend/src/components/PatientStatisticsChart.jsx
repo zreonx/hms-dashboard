@@ -16,7 +16,7 @@ const PatientStatisticsChart = () => {
   const LineChart = () => (
     <ResponsiveLine
       data={data}
-      margin={{ top: 10, right: 60, bottom: 50, left: 60 }}
+      margin={{ top: 10, right: 40, bottom: 50, left: 40 }}
       xScale={{ type: "point" }}
       yScale={{
         type: "linear",

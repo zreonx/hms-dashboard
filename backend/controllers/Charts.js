@@ -66,6 +66,31 @@ const lineChartData = (req, res) => {
   });
 };
 
+const pieChartData = (req, res) => {
+  db.query(
+    `SELECT dept_name, COUNT(*) as department_count FROM doc_dept GROUP BY dept_name;`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const data = JSON.parse(JSON.stringify(result));
+
+        let deptData = [];
+        data.forEach((dept) => {
+          const id = dept.dept_name;
+          const label = dept.dept_name;
+          const value = dept.department_count;
+
+          deptData.push({ id, label, value });
+        });
+
+        res.status(200).json(deptData);
+      }
+    }
+  );
+};
+
 module.exports = {
   lineChartData,
+  pieChartData,
 };

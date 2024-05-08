@@ -1,45 +1,44 @@
 import { Pie, ResponsivePie } from "@nivo/pie";
+import { pieChartData } from "../data/data";
+import { useState } from "react";
 const data = [
   {
-    id: "lisp",
-    label: "lisp",
+    id: "OPD",
+    label: "OPD",
     value: 59,
-    color: "hsl(195, 70%, 50%)",
   },
   {
-    id: "erlang",
-    label: "erlang",
+    id: "OT Complex",
+    label: "OT Complex",
     value: 395,
-    color: "hsl(70, 70%, 50%)",
   },
   {
-    id: "rust",
-    label: "rust",
+    id: "Paramedical",
+    label: "Paramedical",
     value: 555,
-    color: "hsl(211, 70%, 50%)",
   },
   {
-    id: "python",
-    label: "python",
+    id: "Radiology",
+    label: "Radiology",
     value: 314,
-    color: "hsl(205, 70%, 50%)",
-  },
-  {
-    id: "c",
-    label: "c",
-    value: 325,
-    color: "hsl(206, 70%, 50%)",
   },
 ];
 const DoctorPieChart = () => {
+  const { data: pieChartValues, isLoading } = pieChartData();
+
+  let data = [];
+  if (!isLoading) {
+    data = [...pieChartValues];
+  }
   const PieChart = () => (
     <ResponsivePie
       data={data}
-      margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+      margin={{ top: 40, right: 80, bottom: 100, left: 100 }}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
       activeOuterRadiusOffset={8}
+      colors={{ scheme: "purple_blue" }}
       borderWidth={1}
       borderColor={{
         from: "color",
@@ -74,56 +73,6 @@ const DoctorPieChart = () => {
           spacing: 10,
         },
       ]}
-      fill={[
-        {
-          match: {
-            id: "ruby",
-          },
-          id: "dots",
-        },
-        {
-          match: {
-            id: "c",
-          },
-          id: "dots",
-        },
-        {
-          match: {
-            id: "go",
-          },
-          id: "dots",
-        },
-        {
-          match: {
-            id: "python",
-          },
-          id: "dots",
-        },
-        {
-          match: {
-            id: "scala",
-          },
-          id: "lines",
-        },
-        {
-          match: {
-            id: "lisp",
-          },
-          id: "lines",
-        },
-        {
-          match: {
-            id: "elixir",
-          },
-          id: "lines",
-        },
-        {
-          match: {
-            id: "javascript",
-          },
-          id: "lines",
-        },
-      ]}
       legends={[
         {
           anchor: "bottom",
@@ -132,7 +81,7 @@ const DoctorPieChart = () => {
           translateX: 0,
           translateY: 56,
           itemsSpacing: 0,
-          itemWidth: 72,
+          itemWidth: 100,
           itemHeight: 18,
           itemTextColor: "#999",
           itemDirection: "left-to-right",
@@ -153,9 +102,9 @@ const DoctorPieChart = () => {
   );
 
   return (
-    <div className='h-[25rem] border rounded-lg bg-white p-5 w-full md:col-auto lg:col-auto'>
-      <div className=' '>
-        <h1 className='font-semibold text-slate-600'>Pie chart</h1>
+    <div className='h-[25rem] border rounded-lg bg-white py-5 w-full md:col-auto lg:col-auto'>
+      <div className='px-5'>
+        <h1 className='font-semibold text-slate-600'>Doctors</h1>
       </div>
 
       <div className='h-full w-full overflow-hidden'>

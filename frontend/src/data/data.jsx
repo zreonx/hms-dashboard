@@ -57,3 +57,29 @@ export const lineChartData = (filter) => {
 
   return { data, isLoading };
 };
+
+export const pieChartData = () => {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/pie-chart");
+        if (response.ok) {
+          const json = await response.json();
+          setData(json);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { data, isLoading };
+};

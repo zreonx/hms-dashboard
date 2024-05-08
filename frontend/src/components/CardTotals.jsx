@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import CountUp from "react-countup";
 
 import { FaUserInjured } from "react-icons/fa";
 import { FaUserNurse } from "react-icons/fa";
@@ -34,7 +35,9 @@ const CardTotals = ({ data }) => {
         </div>
         <div>
           <h3>Total {capitalizeFirstLetter(label)}</h3>
-          <span className='text-2xl font-medium'>{number}</span>
+          <span className='text-3xl font-medium'>
+            {<CountUp end={number} duration={0.5} />}
+          </span>
         </div>
       </div>
     </motion.div>
