@@ -1,28 +1,28 @@
 import { useState, useEffect } from "react";
 
+// Retry interceptor function
+import axiosRetry from "axios-retry";
+// Default axios instance
+import axios from "axios";
+
+axiosRetry(axios, {
+  retries: 3, // Number of retries (Defaults to 3)
+});
+
 export const cardData = () => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://hms-dashboard-api.vercel.app/api/card-totals"
-        );
-        if (response.ok) {
-          const json = await response.json();
-          setData(json);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
+    axios
+      .get("https://hms-dashboard-api.vercel.app/api/card-totals") // The request is retried if it fails
+      .then((response) => {
+        setData(response.data);
         setIsLoading(false);
-      }
-    };
-
-    fetchData();
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
   }, []);
 
   return { data, isLoading };
@@ -33,31 +33,25 @@ export const lineChartData = (filter) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://hms-dashboard-api.vercel.app/api/line-chart",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ year: filter }),
-          }
-        );
-        if (response.ok) {
-          const json = await response.json();
-          setData(json);
-          setIsLoading(false);
+    axios
+      .post(
+        "https://hms-dashboard-api.vercel.app/api/line-chart",
+        {
+          year: filter,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
+      )
+      .then((response) => {
+        setData(response.data);
         setIsLoading(false);
-      }
-    };
-
-    fetchData();
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
   }, [filter]);
 
   return { data, isLoading };

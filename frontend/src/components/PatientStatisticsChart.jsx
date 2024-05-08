@@ -2,6 +2,8 @@ import { ResponsiveLine } from "@nivo/line";
 import { Select, SelectSection, SelectItem } from "@nextui-org/select";
 import { lineChartData } from "../data/data";
 import { useState } from "react";
+import { Spinner } from "@nextui-org/react";
+
 const PatientStatisticsChart = () => {
   const [filter, setFilter] = useState("All");
 
@@ -102,8 +104,8 @@ const PatientStatisticsChart = () => {
         </Select>
       </div>
 
-      <div className='h-[25rem] w-full overflow-hidden'>
-        <LineChart data={data} />
+      <div className='h-[25rem] w-full overflow-hidden flex justify-center items-center'>
+        {isLoading ? <Spinner /> : <LineChart data={data} />}
       </div>
     </div>
   );

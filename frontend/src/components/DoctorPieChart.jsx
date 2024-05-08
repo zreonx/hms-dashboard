@@ -1,28 +1,8 @@
 import { Pie, ResponsivePie } from "@nivo/pie";
 import { pieChartData } from "../data/data";
 import { useState } from "react";
-const data = [
-  {
-    id: "OPD",
-    label: "OPD",
-    value: 59,
-  },
-  {
-    id: "OT Complex",
-    label: "OT Complex",
-    value: 395,
-  },
-  {
-    id: "Paramedical",
-    label: "Paramedical",
-    value: 555,
-  },
-  {
-    id: "Radiology",
-    label: "Radiology",
-    value: 314,
-  },
-];
+import { Spinner } from "@nextui-org/react";
+
 const DoctorPieChart = () => {
   const { data: pieChartValues, isLoading } = pieChartData();
 
@@ -107,8 +87,8 @@ const DoctorPieChart = () => {
         <h1 className='font-semibold text-slate-600'>Doctors</h1>
       </div>
 
-      <div className='h-full w-full overflow-hidden'>
-        <PieChart />
+      <div className='h-full w-full overflow-hidden flex justify-center items-center'>
+        {isLoading ? <Spinner /> : <PieChart />}
       </div>
     </div>
   );
