@@ -1,5 +1,6 @@
 import { FaFemale } from "react-icons/fa";
 import { FaMale } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 import {
   CircularProgressbar,
@@ -50,16 +51,39 @@ const GenderPatientChart = () => {
         </div>
       </div>
 
-      <div className='flex gap-8 justify-center pb-5'>
+      <div className='h-36 px-10 py-3 mb-3 '>
+        <motion.div
+          whileHover={{
+            scale: 1.1,
+            transition: { duration: 0.3 },
+          }}
+          whileTap={{ scale: 1.1 }}
+          className='h-12 bg-neutral-100 rounded-3xl mb-3 flex justify-center items-center'
+        >
+          <h3 className='font-bold text-2xl text-teal-500'>500</h3>
+        </motion.div>
+        <motion.div
+          whileHover={{
+            scale: 1.1,
+            transition: { duration: 0.3 },
+          }}
+          whileTap={{ scale: 1.1 }}
+          className='h-12 bg-neutral-100 rounded-3xl flex justify-center items-center'
+        >
+          <h3 className='font-bold text-2xl text-red-300'>5500</h3>
+        </motion.div>
+      </div>
+
+      {/* <div className='flex gap-8 justify-center pb-5'>
         <div className='h-14 text-5xl flex flex-row gap-2 justify-center items-center'>
           <h1 className='text-pink-400 font-bold'>12</h1>
           <h3 className='text-2xl font-medium'>Female</h3>
         </div>
-        <div className='h-14 text-5xl flex flex-row gap-2 justify-center items-center '>
+        <div className='h-14 text-5xl flex flex-col gap-2 justify-center items-center px-4'>
           <h1 className='text-blue-400 font-bold'>50</h1>
           <h3 className='text-2xl font-medium'>Male</h3>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
