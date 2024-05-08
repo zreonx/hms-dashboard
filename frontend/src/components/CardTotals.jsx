@@ -1,7 +1,19 @@
 import { motion } from "framer-motion";
 
+import { FaUserInjured } from "react-icons/fa";
+import { FaUserNurse } from "react-icons/fa";
+import { PiDoorFill } from "react-icons/pi";
+import { IoPeopleSharp } from "react-icons/io5";
+
+const iconMap = {
+  FaUserInjured: <FaUserInjured />,
+  FaUserNurse: <FaUserNurse />,
+  PiDoorFill: <PiDoorFill />,
+  IoPeopleSharp: <IoPeopleSharp />,
+};
+
 const CardTotals = ({ data }) => {
-  const { label, number, url } = data;
+  const { label, number, icon } = data;
 
   const capitalizeFirstLetter = (word) => {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -18,7 +30,7 @@ const CardTotals = ({ data }) => {
     >
       <div className='flex flex-row gap-5 justify-start items-center'>
         <div className='h-10 w-10 rounded-full bg-blue-400 flex items-center justify-center p-5'>
-          <span className='text-2xl text-slate-100'>{url}</span>
+          <span className='text-2xl text-slate-100'>{iconMap[icon]}</span>
         </div>
         <div>
           <h3>Total {capitalizeFirstLetter(label)}</h3>

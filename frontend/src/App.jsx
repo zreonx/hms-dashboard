@@ -5,9 +5,11 @@ import PatientStatisticsChart from "./components/PatientStatisticsChart";
 import RevenueChart from "./components/RevenueChart";
 import TableChart from "./components/TableChart";
 
-import { totalCards } from "./data/data";
+import { cardData } from "./data/data";
 
 const App = () => {
+  const { data: totalCards, isLoading } = cardData();
+
   return (
     <div className='light bg-default min-h-screen py-4 px-6'>
       <h1 className='text-2xl font-semibold text-slate-700'>
@@ -15,9 +17,10 @@ const App = () => {
       </h1>
       <h3 className='text-sm text-slate-500 mt-1'>Hospital Admin Dashboard</h3>
       <div className='flex flex-col gap-4 py-5 md:flex-row w-full'>
-        {totalCards.map((card) => {
-          return <CardTotals data={card} />;
-        })}
+        {!isLoading &&
+          totalCards.data.map((card, index) => {
+            return <CardTotals data={card} key={index} />;
+          })}
       </div>
 
       <div className='w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-4 '>

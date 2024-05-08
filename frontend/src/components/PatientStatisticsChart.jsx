@@ -1,63 +1,19 @@
 import { ResponsiveLine } from "@nivo/line";
 import { Select, SelectSection, SelectItem } from "@nextui-org/select";
-const data = [
-  {
-    id: "Patient",
-    color: "hsl(230, 70%, 50%)",
-    data: [
-      {
-        x: "Jan",
-        y: 65,
-      },
-      {
-        x: "Feb",
-        y: 242,
-      },
-      {
-        x: "Mar",
-        y: 91,
-      },
-      {
-        x: "April",
-        y: 2,
-      },
-      {
-        x: "May",
-        y: 193,
-      },
-      {
-        x: "June",
-        y: 247,
-      },
-      {
-        x: "July",
-        y: 198,
-      },
-      {
-        x: "Aug",
-        y: 253,
-      },
-      {
-        x: "Sept",
-        y: 155,
-      },
-      {
-        x: "Oct",
-        y: 257,
-      },
-      {
-        x: "Nov",
-        y: 275,
-      },
-      {
-        x: "Dec",
-        y: 135,
-      },
-    ],
-  },
-];
+import { lineChartData } from "../data/data";
+import { useState } from "react";
 const PatientStatisticsChart = () => {
-  const LineChart = ({ data }) => (
+  const [filter, setFilter] = useState("All");
+
+  const { data: test, isLoading } = lineChartData(filter);
+
+  let data = [];
+
+  if (!isLoading) {
+    data = [test];
+  }
+
+  const LineChart = () => (
     <ResponsiveLine
       data={data}
       margin={{ top: 10, right: 60, bottom: 50, left: 60 }}
@@ -85,7 +41,7 @@ const PatientStatisticsChart = () => {
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,
-        tickValues: [10, 50, 100, 150, 200, 250],
+        tickValues: [0, 1, 2, 3, 5],
         tickRotation: 0,
         legend: "",
         legendOffset: -40,
@@ -117,17 +73,30 @@ const PatientStatisticsChart = () => {
           className='max-w-[10rem] '
           color='primary'
           variant='flat'
+          onChange={(e) => setFilter(e.target.value)}
         >
-          <SelectItem className='hover:!bg-slate-100 focus:!bg-slate-100'>
+          <SelectItem
+            key='All'
+            className='hover:!bg-slate-100 focus:!bg-slate-100'
+          >
             All
           </SelectItem>
-          <SelectItem className='hover:!bg-slate-100 focus:!bg-slate-100'>
+          <SelectItem
+            key='2020'
+            className='hover:!bg-slate-100 focus:!bg-slate-100'
+          >
             2020
           </SelectItem>
-          <SelectItem className='hover:!bg-slate-100 focus:!bg-slate-100'>
+          <SelectItem
+            key='2021'
+            className='hover:!bg-slate-100 focus:!bg-slate-100'
+          >
             2021
           </SelectItem>
-          <SelectItem className='hover:!bg-slate-100 focus:!bg-slate-100'>
+          <SelectItem
+            key='2022'
+            className='hover:!bg-slate-100 focus:!bg-slate-100'
+          >
             2022
           </SelectItem>
         </Select>

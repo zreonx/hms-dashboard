@@ -1,27 +1,59 @@
-import { FaUserInjured } from "react-icons/fa";
-import { FaUserNurse } from "react-icons/fa";
-import { PiDoorFill } from "react-icons/pi";
-import { IoPeopleSharp } from "react-icons/io5";
+import { useState, useEffect } from "react";
 
-export const totalCards = [
-  {
-    label: "patients",
-    number: 52,
-    url: <FaUserInjured />,
-  },
-  {
-    label: "rooms",
-    number: 5,
-    url: <PiDoorFill />,
-  },
-  {
-    label: "nurses",
-    number: 8,
-    url: <FaUserNurse />,
-  },
-  {
-    label: "employee",
-    number: 25,
-    url: <IoPeopleSharp />,
-  },
-];
+export const cardData = () => {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/card-totals");
+        if (response.ok) {
+          const json = await response.json();
+          setData(json);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { data, isLoading };
+};
+
+export const lineChartData = (filter) => {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/line-chart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ year: filter }),
+        });
+        if (response.ok) {
+          const json = await response.json();
+          setData(json);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [filter]);
+
+  return { data, isLoading };
+};
