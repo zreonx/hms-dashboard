@@ -90,7 +90,40 @@ const pieChartData = (req, res) => {
   );
 };
 
+const patientDataTable = (req, res) => {
+  db.query(`SELECT * FROM patient GROUP BY patient_id;`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const data = JSON.parse(JSON.stringify(result));
+
+      let patientData = [];
+
+      data.forEach((patient) => {
+        const id = patient.patient_id;
+        const name = `${patient.first_name} ${patient.last_name}`;
+        const age =
+          new Date().getFullYear() - new Date(patient.dob).getFullYear();
+
+        const gender = patient.gender;
+        const admission_date = new Intl.DateTimeFormat("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }).format(new Date(patient.date_of_admittance));
+
+        let status = patient.date_of_discharge ? "Discharged" : "Admitted";
+
+        patientData.push({ id, name, age, gender, admission_date, status });
+      });
+
+      res.status(200).json(patientData);
+    }
+  });
+};
+
 module.exports = {
   lineChartData,
   pieChartData,
+  patientDataTable,
 };

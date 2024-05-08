@@ -28,30 +28,41 @@ export const cardData = () => {
   return { data, isLoading };
 };
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 export const lineChartData = (filter) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .post(
-        "https://hms-dashboard-api.vercel.app/api/line-chart",
-        {
-          year: filter,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
+    const fetchData = async () => {
+      setIsLoading(true);
+      await delay(500);
+
+      try {
+        const response = await axios.post(
+          "https://hms-dashboard-api.vercel.app/api/line-chart",
+          {
+            year: filter,
           },
-        }
-      )
-      .then((response) => {
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
         setData(response.data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log("Error: ", error);
-      });
+      } catch (error) {
+        console.error("Error:", error);
+      }
+
+      setIsLoading(false);
+    };
+
+    fetchData();
   }, [filter]);
 
   return { data, isLoading };
@@ -66,6 +77,34 @@ export const pieChartData = () => {
       try {
         const response = await fetch(
           "https://hms-dashboard-api.vercel.app/api/pie-chart"
+        );
+        if (response.ok) {
+          const json = await response.json();
+          setData(json);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { data, isLoading };
+};
+
+export const patientTableData = () => {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://hms-dashboard-api.vercel.app/api/patient-table"
         );
         if (response.ok) {
           const json = await response.json();

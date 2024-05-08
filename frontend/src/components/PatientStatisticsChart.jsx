@@ -15,6 +15,15 @@ const PatientStatisticsChart = () => {
     data = [test];
   }
 
+  let years = [];
+  let startYear = 2020;
+  const currentYear = new Date().getFullYear();
+
+  while (startYear <= currentYear) {
+    years.push(startYear);
+    startYear++;
+  }
+
   const LineChart = () => (
     <ResponsiveLine
       data={data}
@@ -83,24 +92,17 @@ const PatientStatisticsChart = () => {
           >
             All
           </SelectItem>
-          <SelectItem
-            key='2020'
-            className='hover:!bg-slate-100 focus:!bg-slate-100'
-          >
-            2020
-          </SelectItem>
-          <SelectItem
-            key='2021'
-            className='hover:!bg-slate-100 focus:!bg-slate-100'
-          >
-            2021
-          </SelectItem>
-          <SelectItem
-            key='2022'
-            className='hover:!bg-slate-100 focus:!bg-slate-100'
-          >
-            2022
-          </SelectItem>
+
+          {years.map((year) => {
+            return (
+              <SelectItem
+                key={year}
+                className='hover:!bg-slate-100 focus:!bg-slate-100'
+              >
+                {year}
+              </SelectItem>
+            );
+          })}
         </Select>
       </div>
 
