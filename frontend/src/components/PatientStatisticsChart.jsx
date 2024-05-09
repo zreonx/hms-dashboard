@@ -100,7 +100,7 @@ const PatientStatisticsChart = () => {
               value={year.value}
               className='hover:bg-slate-100 focus:bg-slate-100'
             >
-              {year.label}
+              {`${year.label}`}
             </SelectItem>
           ))}
         </Select>
