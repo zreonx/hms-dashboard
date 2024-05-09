@@ -33,8 +33,16 @@ const TableChart = () => {
     },
     {
       name: "Status",
-      selector: (row) => row.status,
       sortable: true,
+      cell: (row) => (
+        <span
+          className={`${
+            row.status.toLowerCase() === "discharged" ? "bg-green-200" : ""
+          } py-2 px-3 text-[10px] md:text-xs rounded-md`}
+        >
+          {row.status}
+        </span>
+      ),
     },
   ];
 
