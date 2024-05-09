@@ -18,7 +18,7 @@ const DoctorPieChart = () => {
   const PieChart = () => (
     <ResponsivePie
       data={pieChartValues}
-      margin={{ top: 40, right: 80, bottom: 100, left: 100 }}
+      margin={{ top: 40, right: 80, bottom: 100, left: 120 }}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
@@ -31,9 +31,9 @@ const DoctorPieChart = () => {
       }}
       arcLinkLabelsSkipAngle={10}
       arcLinkLabelsTextColor='#333333'
-      arcLinkLabelsThickness={2}
+      arcLinkLabelsThickness={1}
       arcLinkLabelsColor={{ from: "color" }}
-      arcLabelsSkipAngle={10}
+      arcLabelsSkipAngle={0}
       arcLabelsTextColor={{
         from: "color",
         modifiers: [["darker", 2]],
@@ -63,13 +63,13 @@ const DoctorPieChart = () => {
           anchor: "bottom",
           direction: "row",
           justify: false,
-          translateX: 0,
-          translateY: 56,
+          translateX: -25,
+          translateY: 60,
           itemsSpacing: 0,
-          itemWidth: 100,
+          itemWidth: 75,
           itemHeight: 18,
           itemTextColor: "#999",
-          itemDirection: "left-to-right",
+          itemDirection: "top-to-bottom",
           itemOpacity: 1,
           symbolSize: 12,
           symbolShape: "circle",

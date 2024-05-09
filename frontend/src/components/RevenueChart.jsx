@@ -25,6 +25,7 @@ const RevenueChart = () => {
         colors='#3182CE'
         animate={true}
         enableLabel={false}
+        gridYValues={[50000, 150000, 250000, 350000, 500000]}
         axisTop={null}
         axisRight={null}
         axisBottom={{

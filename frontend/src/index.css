@@ -19,3 +19,15 @@ body {
 .myhover {
   background-color: #f0f0f0 !important;
 }
+
+@media screen and (max-width: 768px) {
+  /* Adjust legend styles for smaller screens */
+  .nivo_legend {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nivo_legend_item {
+    margin: 5px;
+  }
+}

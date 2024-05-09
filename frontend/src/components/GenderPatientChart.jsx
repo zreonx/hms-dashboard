@@ -43,12 +43,12 @@ const GenderPatientChart = () => {
     );
   };
   return (
-    <div className='bg-white border w-full rounded-lg md:col-auto lg:col-auto relative'>
-      <div className='flex flex-row justify-between px-5 py-5 pb-8'>
+    <div className='bg-white border w-full rounded-lg md:col-auto lg:col-auto relative h-full min-h-[24rem] max-h-full'>
+      <div className=' flex flex-row justify-between px-5 py-5 pb-8'>
         <h3 className=' font-semibold text-slate-600'>Gender Demographic</h3>
       </div>
 
-      <div className='grid w-full justify-center items-center'>
+      <div className='grid w-full justify-center items-center '>
         {isLoading ? (
           <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
             <Spinner />
