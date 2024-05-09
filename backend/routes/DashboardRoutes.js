@@ -6,14 +6,16 @@ const {
   pieChartData,
   patientDataTable,
   genderDemographicData,
+  revenueChartData,
 } = require("../controllers/Charts");
 
 const router = express.Router();
 
 router.get("/card-totals", totals);
-router.post("/line-chart", lineChartData);
 router.get("/pie-chart", pieChartData);
 router.get("/patient-table", patientDataTable);
 router.get("/gender-demographic", genderDemographicData);
+router.get("/revenue-chart", revenueChartData);
+router.post("/line-chart", lineChartData);
 
 module.exports = router;

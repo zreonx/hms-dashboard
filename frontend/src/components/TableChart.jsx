@@ -1,6 +1,7 @@
 import DataTable from "react-data-table-component";
 import SearchComponent from "./SearchComponent";
 import { useState } from "react";
+import { Spinner } from "@nextui-org/react";
 
 import { patientTableData } from "../data/data";
 
@@ -68,16 +69,20 @@ const TableChart = () => {
 
   return (
     <div className='rounded-lg px-5 pb-5'>
-      <div className='flex flex-col gap-2 md:flex-row justify-between pt-5 pb-1'>
+      <div className='flex flex-col gap-2 sm-[320px]:flex-row justify-between pt-5 pb-1'>
         <h3 className=' font-semibold text-slate-600'>Patient Information</h3>
-        <div className='ml-auto'>
+        <div className='lg:ml-auto'>
           <SearchComponent
             searchText={searchText}
             setSearchText={setSearchText}
           />
         </div>
       </div>
-      {!isLoading && (
+      {isLoading ? (
+        <div className='flex justify-center items-center p-10'>
+          <Spinner />
+        </div>
+      ) : (
         <DataTable columns={columns} data={filteredItems} pagination />
       )}
     </div>

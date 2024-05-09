@@ -7,7 +7,7 @@ const SearchComponent = ({ searchText, setSearchText }) => {
   return (
     <div className='relative'>
       <input
-        className='focus:outline-none pl-3 pr-8 py-2 border-1 rounded-lg text-sm'
+        className='focus:outline-none sm:w-full w-60 max-w-full pl-3 pr-8 py-2 border-1 rounded-lg text-sm'
         id='search'
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}

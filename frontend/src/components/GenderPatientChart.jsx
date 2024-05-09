@@ -56,7 +56,7 @@ const GenderPatientChart = () => {
         ) : (
           <>
             <div className='flex flex-row gap-5 justify-center items-center pb-5 px-3 '>
-              <div className='h-36 w-36 text-7xl text-purple-300'>
+              <div className='h-18 w-18 sm:h-36 sm:w-36 text-7xl text-purple-300'>
                 <CircularProgressbarWithChildren
                   strokeWidth={5}
                   value={Math.round(data.female.percentage)}
@@ -66,14 +66,16 @@ const GenderPatientChart = () => {
                   })}
                 >
                   <div className='flex items-center'>
-                    <FaFemale />
+                    <span className='max-sm:hidden'>
+                      <FaFemale />
+                    </span>
                     <span className='text-xs'>
                       {Math.round(data.female.percentage)}%
                     </span>
                   </div>
                 </CircularProgressbarWithChildren>
               </div>
-              <div className='h-36 w-36 text-7xl text-teal-200'>
+              <div className='h-18 w-18 sm:h-36 sm:w-36  text-7xl text-teal-200'>
                 <CircularProgressbarWithChildren
                   strokeWidth={5}
                   value={Math.round(data.male.percentage)}
@@ -83,7 +85,9 @@ const GenderPatientChart = () => {
                   })}
                 >
                   <div className='flex items-center'>
-                    <FaMale />
+                    <span className='max-sm:hidden'>
+                      <FaMale />
+                    </span>
                     <span className='text-xs'>
                       {Math.round(data.male.percentage)}%
                     </span>

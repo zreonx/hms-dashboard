@@ -152,9 +152,52 @@ const genderDemographicData = (req, res) => {
   });
 };
 
+const revenueChartData = (req, res) => {
+  db.query(
+    `SELECT CAST(YEAR(payment.date_of_admittance) AS CHAR)  AS year, SUM(treatment.cost) AS revenue FROM payment INNER JOIN treatment ON payment.prescription COLLATE utf8mb4_general_ci = treatment.prescription COLLATE utf8mb4_general_ci
+     GROUP BY
+     YEAR(payment.date_of_admittance)`,
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        let data = JSON.parse(JSON.stringify(result));
+
+        let yearList = [];
+        const currentYear = new Date().getFullYear();
+        for (let i = 2020; i <= currentYear; i++) {
+          yearList.push(i);
+        }
+
+        let revenueData = [];
+
+        const ensureAllYears = (revenueData, yearList) => {
+          const updatedRevenueData = [...data];
+
+          yearList.forEach((y) => {
+            let yearExists = data.some((item) => item.year === y.toString());
+
+            if (yearExists) {
+            } else {
+              updatedRevenueData.push({ year: y.toString(), revenue: 0 });
+            }
+          });
+
+          return updatedRevenueData;
+        };
+
+        revenueData = ensureAllYears(revenueData, yearList);
+
+        res.status(200).json(revenueData);
+      }
+    }
+  );
+};
+
 module.exports = {
   lineChartData,
   pieChartData,
   patientDataTable,
   genderDemographicData,
+  revenueChartData,
 };

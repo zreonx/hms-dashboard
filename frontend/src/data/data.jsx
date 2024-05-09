@@ -18,15 +18,18 @@ export const cardData = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("/api/card-totals") // The request is retried if it fails
-      .then((response) => {
+    const fetchData = async () => {
+      await delay(1000);
+      try {
+        const response = await axios.get("api/card-totals");
         setData(response.data);
         setIsLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log("Error: ", error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   return { data, isLoading };
@@ -73,15 +76,18 @@ export const pieChartData = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("api/pie-chart") // The request is retried if it fails
-      .then((response) => {
+    const fetchData = async () => {
+      await delay(500);
+      try {
+        const response = await axios.get("api/pie-chart");
         setData(response.data);
         setIsLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log("Error: ", error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   return { data, isLoading };
@@ -92,15 +98,18 @@ export const patientTableData = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("api/patient-table") // The request is retried if it fails
-      .then((response) => {
+    const fetchData = async () => {
+      await delay(500);
+      try {
+        const response = await axios.get("api/patient-table");
         setData(response.data);
         setIsLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log("Error: ", error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   return { data, isLoading };
@@ -112,8 +121,31 @@ export const genderDemographicData = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      await delay(500);
       try {
         const response = await axios.get("api/gender-demographic");
+        setData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return { data, isLoading };
+};
+
+export const revenueData = () => {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await delay(500);
+      try {
+        const response = await axios.get("api/revenue-chart");
         setData(response.data);
         setIsLoading(false);
       } catch (error) {

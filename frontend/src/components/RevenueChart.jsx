@@ -1,27 +1,19 @@
 import { ResponsiveBar } from "@nivo/bar";
-const data = [
-  {
-    year: "2022",
-    revenue: 80000,
-  },
-  {
-    year: "2021",
-    revenue: 10000,
-  },
-  {
-    year: "2020",
-    revenue: 40000,
-  },
-];
+import { Spinner } from "@nextui-org/react";
+
+import { revenueData } from "../data/data";
 
 const RevenueChart = () => {
+  const { data: revenueChartData, isLoading } = revenueData();
+
   const tickFormatter = (value) => {
     return `${value / 1000}k`;
   };
+
   const Bar = () => {
     return (
       <ResponsiveBar
-        data={data}
+        data={revenueChartData}
         keys={["revenue"]}
         indexBy='year'
         borderRadius={4}
@@ -40,7 +32,7 @@ const RevenueChart = () => {
         axisLeft={{
           tickSize: 0,
           tickPadding: 8,
-          tickValues: [10000, 30000, 50000, 70000, 900000, 110000],
+          tickValues: [50000, 150000, 250000, 350000, 500000],
           tickRotation: 0,
           legend: "",
           legendOffset: -40,
@@ -58,8 +50,8 @@ const RevenueChart = () => {
         <h3 className=' font-semibold text-slate-600'>Revenue</h3>
       </div>
 
-      <div className='w-full h-full overflow-hidden'>
-        <Bar />
+      <div className='w-full h-full overflow-hidden flex justify-center items-center'>
+        {isLoading ? <Spinner /> : <Bar />}
       </div>
     </div>
   );
