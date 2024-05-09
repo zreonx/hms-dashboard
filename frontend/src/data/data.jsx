@@ -6,7 +6,8 @@ axiosRetry(axios, {
   retries: 3,
 });
 
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = "https://hms-dashboard-api.vercel.app/";
+// axios.defaults.baseURL = "http://localhost:5000/";
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
