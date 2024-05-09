@@ -122,8 +122,39 @@ const patientDataTable = (req, res) => {
   });
 };
 
+const genderDemographicData = (req, res) => {
+  db.query("SELECT * FROM patient GROUP BY patient_id", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      let data = JSON.parse(JSON.stringify(result));
+
+      let total = data.length;
+
+      const male = data.filter(
+        (patient) => patient.gender.toLowerCase() === "male"
+      ).length;
+      const female = data.filter(
+        (patient) => patient.gender.toLowerCase() === "female"
+      ).length;
+
+      const malePercentage = (male / total) * 100;
+      const femalePercentage = (female / total) * 100;
+
+      let jsonData = {
+        total,
+        male: { number: male, percentage: malePercentage },
+        female: { number: female, percentage: femalePercentage },
+      };
+
+      res.status(200).json(jsonData);
+    }
+  });
+};
+
 module.exports = {
   lineChartData,
   pieChartData,
   patientDataTable,
+  genderDemographicData,
 };

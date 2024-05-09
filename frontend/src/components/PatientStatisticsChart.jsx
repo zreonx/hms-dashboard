@@ -25,12 +25,6 @@ const PatientStatisticsChart = () => {
     return yearsArray;
   }, [currentYear]);
 
-  console.log(years);
-
-  // const SelectItem = memo(({ children, className }) => {
-  //   return <div className={className}>{children}</div>;
-  // });
-
   const LineChart = () => (
     <ResponsiveLine
       data={data}

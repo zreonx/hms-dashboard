@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
-
-// Retry interceptor function
 import axiosRetry from "axios-retry";
-// Default axios instance
 import axios from "axios";
 
 axiosRetry(axios, {
-  retries: 3, // Number of retries (Defaults to 3)
+  retries: 3,
 });
+
+axios.defaults.baseURL = "http://localhost:5000/";
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 export const cardData = () => {
   const [data, setData] = useState(null);
@@ -15,7 +18,7 @@ export const cardData = () => {
 
   useEffect(() => {
     axios
-      .get("https://hms-dashboard-api.vercel.app/api/card-totals") // The request is retried if it fails
+      .get("/api/card-totals") // The request is retried if it fails
       .then((response) => {
         setData(response.data);
         setIsLoading(false);
@@ -28,10 +31,6 @@ export const cardData = () => {
   return { data, isLoading };
 };
 
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 export const lineChartData = (filter) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +42,7 @@ export const lineChartData = (filter) => {
 
       try {
         const response = await axios.post(
-          "https://hms-dashboard-api.vercel.app/api/line-chart",
+          "/api/line-chart",
           {
             year: filter,
           },
@@ -73,24 +72,15 @@ export const pieChartData = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://hms-dashboard-api.vercel.app/api/pie-chart"
-        );
-        if (response.ok) {
-          const json = await response.json();
-          setData(json);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
+    axios
+      .get("api/pie-chart") // The request is retried if it fails
+      .then((response) => {
+        setData(response.data);
         setIsLoading(false);
-      }
-    };
-
-    fetchData();
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
   }, []);
 
   return { data, isLoading };
@@ -101,20 +91,32 @@ export const patientTableData = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    axios
+      .get("api/patient-table") // The request is retried if it fails
+      .then((response) => {
+        setData(response.data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+  }, []);
+
+  return { data, isLoading };
+};
+
+export const genderDemographicData = () => {
+  const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://hms-dashboard-api.vercel.app/api/patient-table"
-        );
-        if (response.ok) {
-          const json = await response.json();
-          setData(json);
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
+        const response = await axios.get("api/gender-demographic");
+        setData(response.data);
         setIsLoading(false);
+      } catch (error) {
+        console.log("Error: ", error);
       }
     };
 
