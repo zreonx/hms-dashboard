@@ -3,16 +3,21 @@ import { pieChartData } from "../data/data";
 import { useState } from "react";
 import { Spinner } from "@nextui-org/react";
 
+import { FiExternalLink } from "react-icons/fi";
+import { Link, useLocation } from "react-router-dom";
+
 const DoctorPieChart = () => {
   const { data: pieChartValues, isLoading } = pieChartData();
+  const { pathname } = useLocation();
 
+  console.log(location);
   let data = [];
   if (!isLoading) {
     data = [...pieChartValues];
   }
   const PieChart = () => (
     <ResponsivePie
-      data={data}
+      data={pieChartValues}
       margin={{ top: 40, right: 80, bottom: 100, left: 100 }}
       innerRadius={0.5}
       padAngle={0.7}
@@ -82,15 +87,29 @@ const DoctorPieChart = () => {
   );
 
   return (
-    <div className='h-[25rem] border rounded-lg bg-white py-5 w-full md:col-auto lg:col-auto'>
-      <div className='px-5'>
-        <h1 className='font-semibold text-slate-600'>Doctors</h1>
-      </div>
+    <>
+      <div
+        className={`${
+          pathname != "/" ? "h-full" : "h-[25rem]"
+        } border rounded-lg bg-white py-5 w-full md:col-auto lg:col-auto`}
+      >
+        <div className='px-5 flex justify-between'>
+          <h1 className={`font-semibold text-slate-600`}>Doctors</h1>
+          <Link
+            to='pie-chart'
+            className={` text-slate-300 hover:text-slate-500 ${
+              pathname != "/" ? "hidden" : ""
+            }`}
+          >
+            <FiExternalLink />
+          </Link>
+        </div>
 
-      <div className='h-full w-full overflow-hidden flex justify-center items-center'>
-        {isLoading ? <Spinner /> : <PieChart />}
+        <div className='h-full w-full overflow-hidden flex justify-center items-center'>
+          {isLoading ? <Spinner /> : <PieChart />}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
