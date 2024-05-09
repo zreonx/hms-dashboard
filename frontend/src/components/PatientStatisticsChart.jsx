@@ -18,9 +18,9 @@ const PatientStatisticsChart = () => {
   const currentYear = new Date().getFullYear();
 
   const years = useMemo(() => {
-    const yearsArray = [];
+    const yearsArray = [{ label: "All", value: "All" }];
     for (let year = 2020; year <= currentYear; year++) {
-      yearsArray.push(year);
+      yearsArray.push({ label: `${year}`, value: year });
     }
     return yearsArray;
   }, [currentYear]);
@@ -87,25 +87,20 @@ const PatientStatisticsChart = () => {
       <div className='flex flex-row justify-between px-5 py-5'>
         <h3 className=' font-semibold text-slate-600'>Patient Statistic</h3>
         <Select
-          placeholder='Yearly'
+          placeholder='All'
           className='max-w-[10rem] '
           color='primary'
           variant='flat'
+          value={filter}
           onChange={(e) => setFilter(e.target.value)}
         >
-          <SelectItem
-            key='All'
-            className='hover:!bg-slate-100 focus:!bg-slate-100'
-          >
-            All
-          </SelectItem>
-
           {years.map((year) => (
             <SelectItem
-              key={year}
+              key={year.value}
+              value={year.value}
               className='hover:bg-slate-100 focus:bg-slate-100'
             >
-              {year.toString()}
+              {year.label}
             </SelectItem>
           ))}
         </Select>
