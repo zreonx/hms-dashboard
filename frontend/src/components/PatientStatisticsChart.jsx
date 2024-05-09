@@ -1,7 +1,7 @@
 import { ResponsiveLine } from "@nivo/line";
 import { Select, SelectSection, SelectItem } from "@nextui-org/select";
 import { lineChartData } from "../data/data";
-import { useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { Spinner } from "@nextui-org/react";
 
 const PatientStatisticsChart = () => {
@@ -15,14 +15,21 @@ const PatientStatisticsChart = () => {
     data = [test];
   }
 
-  let years = [];
-  let startYear = 2020;
   const currentYear = new Date().getFullYear();
 
-  while (startYear <= currentYear) {
-    years.push(startYear);
-    startYear++;
-  }
+  const years = useMemo(() => {
+    const yearsArray = [];
+    for (let year = 2020; year <= currentYear; year++) {
+      yearsArray.push(year);
+    }
+    return yearsArray;
+  }, [currentYear]);
+
+  console.log(years);
+
+  // const SelectItem = memo(({ children, className }) => {
+  //   return <div className={className}>{children}</div>;
+  // });
 
   const LineChart = () => (
     <ResponsiveLine
@@ -93,16 +100,14 @@ const PatientStatisticsChart = () => {
             All
           </SelectItem>
 
-          {years.map((year) => {
-            return (
-              <SelectItem
-                key={year}
-                className='hover:!bg-slate-100 focus:!bg-slate-100'
-              >
-                {year}
-              </SelectItem>
-            );
-          })}
+          {years.map((year) => (
+            <SelectItem
+              key={year}
+              className='hover:bg-slate-100 focus:bg-slate-100'
+            >
+              {year.toString()}
+            </SelectItem>
+          ))}
         </Select>
       </div>
 
