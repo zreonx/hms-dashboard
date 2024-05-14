@@ -16,7 +16,7 @@ const lineChartData = (req, res) => {
   db.query(query, year ? [year] : [], (err, result) => {
     if (err) {
       console.log(err);
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: "Error in deployment" });
     } else {
       let data = JSON.parse(JSON.stringify(result));
 
@@ -72,7 +72,7 @@ const pieChartData = (req, res) => {
     `SELECT dept_name, COUNT(*) as department_count FROM doc_dept GROUP BY dept_name;`,
     (err, result) => {
       if (err) {
-        res.status(500).send({ message: err });
+        res.status(500).send({ message: "Error in deployment" });
         console.log(err);
       } else {
         const data = JSON.parse(JSON.stringify(result));
@@ -96,7 +96,7 @@ const patientDataTable = (req, res) => {
   db.query(`SELECT * FROM patient GROUP BY patient_id;`, (err, result) => {
     if (err) {
       console.log(err);
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: "Error in deployment" });
     } else {
       const data = JSON.parse(JSON.stringify(result));
 
@@ -129,7 +129,7 @@ const genderDemographicData = (req, res) => {
   db.query("SELECT * FROM patient GROUP BY patient_id", (err, result) => {
     if (err) {
       console.log(err);
-      res.status(500).send({ message: err });
+      res.status(500).send({ message: "Error in deployment" });
     } else {
       let data = JSON.parse(JSON.stringify(result));
 
@@ -164,7 +164,7 @@ const revenueChartData = (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-        res.status(500).send({ message: err });
+        res.status(500).send({ message: "Error in deployment" });
       } else {
         let data = JSON.parse(JSON.stringify(result));
 
