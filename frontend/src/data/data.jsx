@@ -4,6 +4,7 @@ import axios from "axios";
 
 axiosRetry(axios, {
   retries: 3,
+  retryCondition: () => true,
 });
 
 axios.defaults.baseURL = "https://hms-dashboard-api.vercel.app/";
@@ -58,11 +59,10 @@ export const lineChartData = (filter) => {
         );
 
         setData(response.data);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error:", error);
       }
-
-      setIsLoading(false);
     };
 
     fetchData();
