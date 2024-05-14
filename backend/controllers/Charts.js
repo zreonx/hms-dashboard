@@ -7,7 +7,7 @@ const lineChartData = (req, res) => {
   console.log(req.body);
 
   let query = "";
-  if (!year || year.toLowerCase() === "all") {
+  if (year === "All") {
     query = "SELECT * FROM patient";
   } else {
     query = "SELECT * FROM patient WHERE YEAR(date_of_admittance) = ?";
