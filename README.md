@@ -1,5 +1,5 @@
 
-# Hospital Management Dashboard
+# Hospital Management Dashboard CC105 Final Examination
 
 Created using Node JS, React JS and MYSQL Database
 
