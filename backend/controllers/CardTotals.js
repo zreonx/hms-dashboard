@@ -6,7 +6,7 @@ const totals = (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-        res.status(500).send({ message: "Error in deployment" });
+        res.status(500).send({ message: err });
       } else {
         let data = JSON.parse(JSON.stringify(result));
 
