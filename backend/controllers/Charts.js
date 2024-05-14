@@ -2,12 +2,12 @@ const db = require("../config/db");
 const { all } = require("../routes/DashboardRoutes");
 
 const lineChartData = (req, res) => {
-  let year = req.body.year || "All";
+  let year = req.body.year;
 
   console.log(req.body);
 
   let query = "";
-  if (year === "All") {
+  if (!year || year.toLowerCase() === "all") {
     query = "SELECT * FROM patient";
   } else {
     query = "SELECT * FROM patient WHERE YEAR(date_of_admittance) = ?";
