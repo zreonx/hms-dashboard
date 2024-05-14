@@ -3,7 +3,11 @@ import axiosRetry from "axios-retry";
 import axios from "axios";
 
 axiosRetry(axios, {
-  retries: 3,
+  retries: Infinity,
+  retryDelay: (retryCount) => {
+    console.log(`retry attempt: ${retryCount}`);
+    return retryCount * 2000;
+  },
   retryCondition: () => true,
 });
 
