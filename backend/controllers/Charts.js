@@ -2,7 +2,7 @@ const db = require("../config/db");
 const { all } = require("../routes/DashboardRoutes");
 
 const lineChartData = (req, res) => {
-  let year = req.body.year;
+  let year = req.body.year || "All";
 
   console.log(req.body);
 
