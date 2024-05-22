@@ -29,13 +29,13 @@ const Home = () => {
   ));
   return (
     <div className='bg-default min-h-screen py-4 px-6'>
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-start items-center flex-col sm:flex-row max-sm:gap-7 sm:justify-between mb-2'>
         <div>
-          <h1 className='text-2xl font-semibold text-slate-700'>
+          <h1 className='text-2xl font-semibold text-slate-700 sm:text-center'>
             Welcome to MMGG Hospital
           </h1>
 
-          <h3 className='text-sm text-slate-500 mt-1'>
+          <h3 className='text-sm text-slate-500 mt-1 max-sm:text-center'>
             Hospital Admin Dashboard
           </h3>
         </div>
